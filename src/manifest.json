@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Sync Bookmarks in Drive",
+    "description": "Sync your bookmarks with a spreadsheet from your Google Drive.",
+    "version": "1.0",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "temp_icon.png"
+    },
+    "background": {
+        "service_worker": "background/bookmark_oracle.js",
+        "type": "module"
+    },
+    "permissions": [
+        "bookmarks",
+        "storage",
+        "identity"
+    ],
+    "key": "%EXTENSION_PUBLIC_KEY%",
+    "oauth2": {
+        "client_id": "%OAUTH2_CLIENT_ID%",
+        "scopes": [
+            "https://www.googleapis.com/auth/drive.file"
+        ]
+    }
+}

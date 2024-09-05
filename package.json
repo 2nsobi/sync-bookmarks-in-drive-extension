@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build-extension-windows": "tsc -b && vite build && copy src\\manifest.json dist\\manifest.json && xcopy /e /i src\\background dist\\background",
+    "build-extension-windows": "tsc -b && vite build && process_extension_files.bat",
     "lint": "eslint .",
     "preview": "vite preview"
   },
