@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build-extension-windows": "tsc -b && vite build && process_extension_files.bat",
+    "build-extension-windows": "tsc -b && vite build && node --env-file=.env process_extension_files.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
-    "@types/node": "^22.5.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
