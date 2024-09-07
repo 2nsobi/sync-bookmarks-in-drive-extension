@@ -24,14 +24,14 @@ a:hover {
 }
 
 header {
-  min-width: 360px;
+  min-width: 435px;
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 360px;
+  min-width: 435px;
   min-height: 100vh;
 }
 

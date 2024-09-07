@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mantine/core": "^7.12.2",
+    "@mantine/form": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
     "@tabler/icons": "^3.14.0",
     "@types/chrome": "^0.0.270",

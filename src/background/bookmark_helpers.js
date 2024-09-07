@@ -2,6 +2,8 @@ import { createSpreadsheet, getBookmarkTree } from './google_api_helpers.js'
 
 const SYNC_FILE_NAME_PREFIX = 'Sync File for Sync Bookmarks in Chome Extension'
 const COLUMN_NAMES = ['id', 'parentId', 'index', 'title', 'url']
+const SPREADSHEET_ID_KEY = 'spreadsheetId'
+const SHEET_ID_KEY = 'sheetId'
 
 function convertValuesToCellDataArray(vals) {
     return vals.map(v => {
@@ -45,17 +47,26 @@ function convertBookmarkTreeToSheetsData(tree) {
     return [sheet]
 }
 
-function storeSyncFileInfo(spreadsheet) {
+async function storeSyncFileInfo(spreadsheet) {
     const spreadsheetId = spreadsheet.spreadsheetId
     const sheetId = spreadsheet.sheets[0].properties.sheetId
-    chrome.storage.sync.set({ spreadsheetId, sheetId }).then(() => {
+    const payload = {}
+    payload[SPREADSHEET_ID_KEY] = spreadsheetId
+    payload[SHEET_ID_KEY] = sheetId
+    await chrome.storage.sync.set(payload).then(() => {
         console.log(`Sync file info stored:\nSpreadsheet ID: ${spreadsheetId}\nSheet ID: ${sheetId}`);
     });
 }
 
+async function getSyncFileInfo() {
+    const info = await chrome.storage.sync.get([SPREADSHEET_ID_KEY, SHEET_ID_KEY])
+    console.log(`Sync file info retrieved:\nSpreadsheet ID: ${info[SPREADSHEET_ID_KEY]}\nSheet ID: ${info[SHEET_ID_KEY]}`)
+    return info
+}
+
 export async function createBookmarkSyncFile() {
     const tree = await getBookmarkTree()
-    console.log(tree)
+    console.log(tree) // <---------------------------------------- DELETE this
     if (tree.hasOwnProperty('error')) {
         return tree
     }
@@ -64,6 +75,7 @@ export async function createBookmarkSyncFile() {
     const spreadsheet = await createSpreadsheet(`${SYNC_FILE_NAME_PREFIX} (${new Date().toISOString()})`, sheets)
 
     storeSyncFileInfo(spreadsheet)
+    getSyncFileInfo()
 
     return spreadsheet
 

@@ -17,7 +17,7 @@ export const CreateFile = () => {
         <>
             <Button
                 onClick={createBookmarkSyncFileFrontend}
-                styles={{ root: { height: 120, width: 100 } }}
+                styles={{ root: { height: 120, width: 110 } }}
                 variant="gradient"
                 gradient={{ from: 'blue', to: 'green', deg: 90 }}
             >
